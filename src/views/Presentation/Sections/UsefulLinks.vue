@@ -1,35 +1,32 @@
 <template>
-  <div style="padding:20px; background:#FFE6FF; border-radius:8px;">
-    <h3 class="mb-3">常用連結</h3>
-    <div class="d-flex flex-column gap-3">
-      <div
-        v-for="(link, index) in usefulLinks"
-        :key="index"
-        style="
-          display:flex;
-          align-items:center;
-          background:white;
-          padding:10px;
-          border-radius:6px;
-          box-shadow:0 2px 6px rgba(0,0,0,0.1);
-        "
-      >
-        <div style="width:36px; height:36px; background:#FF79BC; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-size:18px; margin-right:12px;">
-          🔗
+  <div class="container mt-1">
+    <div class="activities-wrapper">
+      <div class="activity-column announcement">
+        <div class="activity-header">
+          <span
+            style="font-weight: bold; 
+                   font-size: 32px;
+                   background: -webkit-linear-gradient(transparent 65%,#ffcbff 60%, #ffcbff 100%,transparent 100%);">
+            常用連結
+          </span>
         </div>
-        <div>
-          <a :href="link.url" target="_blank" style="font-weight:bold;  text-decoration:none;">
-            {{ link.name }}
-          </a>
-          <div style="font-size:13px; color:#555;">{{ link.desc }}</div>
+        <div class="header-divider"></div>
+        
+        <div class="activity-list">
+          <div
+            class="activity-item"
+            v-for="(item,index) in activeLinks"
+            :key="index"
+          >
+            <a :href="item.url" target="_blank" style="font-weight:bold; text-decoration:none;">
+              {{ item.name }}
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-
-
-
 
 <script>
 export default {
@@ -37,11 +34,47 @@ export default {
   data() {
     return {
       usefulLinks: [
-        { name: "常用1", url: "https://school.example.com/example1", desc: "\t簡介1" },
-        { name: "常用2", url: "https://school.example.com/example2", desc: "\t簡介2" },
-        { name: "常用3", url: "https://school.example.com/example3", desc: "\t簡介3" },
+        { name: "勤樸樓B1小舞台借用表單", url: "https://docs.google.com/forms/d/e/1FAIpQLSejrDm3GZMShG0W9Oz7HmFmzpIZpgWy7VSLPd8wQCELu1-6Ow/viewform"},
+        { name: "學權申訴表單", url: "https://docs.google.com/forms/d/e/1FAIpQLSerOl43A14UWK23EOhhOYo_TVp1NU3PzSnHWav6oAPyIpZ4Bg/viewform"}
       ],
     };
   },
+  computed: {
+  activeLinks() {
+    return this.usefulLinks;
+  }
+  } 
 };
 </script>
+
+<style scoped>
+.activities-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.activity-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-divider {
+  width: 500px;              
+  height: 2px;                
+  background-color: #ffdbf0;  
+  margin: 8px 0;             
+  border-radius: 1px;        
+}
+
+.announcement .activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.activity-item {
+  font-size: 20px;
+}
+</style>

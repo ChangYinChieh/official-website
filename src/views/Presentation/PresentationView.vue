@@ -19,7 +19,7 @@ import Announcement from "./Sections/Announcement.vue";
 import vueMkHeader from "@/assets/img/banner.jpg";
 import UsefulLinks from "./Sections/UsefulLinks.vue";
 import History from "./Sections/History.vue";
-
+import Info from "@/examples/cards/infoCards/InfoSection.vue"
 //hooks
 const body = document.getElementsByTagName("body")[0];
 
@@ -61,7 +61,6 @@ onUnmounted(() => {
       `"
       loading="lazy"
     >
-    <!-- :style="{ backgroundColor: '#e3f2fd' }" -->
       <div class="container">
         <div class="row">
           <div class="col-lg-7 text-center mx-auto position-relative">
@@ -95,15 +94,6 @@ onUnmounted(() => {
         </div>
       </div>
       
-      <!--     
-      <hr class="my-4" />
-    
-      <div class="row" >
-        <div class="col-12" >
-            <UsefulLinks />
-        </div>
-      </div> -->
-      
     </div>
     <hr class="my-6" />
     <div class="text">
@@ -120,33 +110,28 @@ onUnmounted(() => {
     <p class="content">學生會是北市大最高層級的學生自治團體，分為兩大部門，分別是行政部門（學生會）與立法部門（學生議會），我們致力於維護學生權益，成為同學面對校內問題或想表達意見時最直接、最可靠的窗口。
         我們透過參與校務會議，傳達學生的立場與需求，同時舉辦多元活動，讓同學能投入校園公共事務，建立彼此的連結感。學生會成員來自不同系所與年級，因為對學校的關心與公共事務的熱情而聚在一起，堅信學生的聲音能帶來改變。
     </p>
+    <hr class="my-4" />
     <section id ="intro" class="py-5">
       <!-- 資訊公開頁面 -->
+     <Info/>
     </section>
   </div>
-  <!-- 資訊公開 -->
 </div>
   <DefaultFooter />
 </template>
 <style scoped>
 .custom-shadow {
-  /* 多層疊加陰影 */
   padding: 2rem;
   box-shadow: 
     0 10px 15px rgba(0, 0, 0, 0.2),
     0 20px 40px rgba(0, 0, 0, 0.3);
 
-  /* 保留模糊背景效果 */
   backdrop-filter: blur(10px);
   
-  /* 可選：圓角讓卡片更柔和 */
   border-radius: 16px;
 }
 section {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+padding: 3rem 1rem;
 }
 
 .text {
@@ -174,10 +159,10 @@ section {
   opacity: 0;
   transform: translateY(20px);
   transition: all 2s ease-out;
-  max-width: 950px;   /* 你可以改成 500px、700px 等 */
-  margin: 0 auto;     /* 讓區塊水平置中 */
-  line-height: 1.6;   /* 增加行距，閱讀更舒服 */
-  text-align: justify; /* 讓文字左右對齊（可選） */
+  max-width: 950px;  
+  margin: 0 auto;    
+  line-height: 1.6;  
+  text-align: justify; 
 }
 .content.show {
   opacity: 1;

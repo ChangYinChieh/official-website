@@ -19,7 +19,7 @@ import Announcement from "./Sections/Announcement.vue";
 import vueMkHeader from "@/assets/img/banner.jpg";
 import UsefulLinks from "./Sections/UsefulLinks.vue";
 import History from "./Sections/History.vue";
-import Info from "@/examples/cards/infoCards/InfoSection.vue"
+//import Info from "@/examples/cards/infoCards/InfoSection.vue"
 //hooks
 const body = document.getElementsByTagName("body")[0];
 
@@ -113,7 +113,7 @@ onUnmounted(() => {
     <hr class="my-4" />
     <section id ="intro" class="py-5">
       <!-- 資訊公開頁面 -->
-     <Info/>
+     <!-- <Info/> -->
     </section>
   </div>
 </div>

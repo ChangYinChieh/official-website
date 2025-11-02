@@ -50,7 +50,7 @@ defineProps({
         ]
       },
       {
-        name: "會辦位子",
+        name: "會辦位置",
         items: [
           {
             name: "博愛校區：勤樸樓CB120",
@@ -67,11 +67,11 @@ defineProps({
         name: "聯絡我們",
         items: [
           {
-            name: "Mail:utsa@go.utaipei.edu.tw",
+            name: "Mail : utsa@go.utaipei.edu.tw",
             // href: "utsa@go.utaipei.edu.tw"
           },
           {
-            name: "IG:@utaipei_sa",
+            name: "IG : @utaipei_sa",
             // href: "utsa@go.utaipei.edu.tw"
           }
         ]
@@ -90,9 +90,9 @@ defineProps({
           v-for="brand in brands"
           :key="brand.name"
         >
-          <a :href="brand.route">
-            <img :src="brand.logo" class="mb-2 footer-logo" alt="main_logo" />
-          </a>
+          
+          <img :src="brand.logo" class="mb-2 footer-logo" alt="main_logo" />
+          
           <h6 class="font-weight-bolder mb-1">{{ brand.name }}</h6>
           <p class="text-sm">{{ brand.en }}</p>
         </div>
@@ -105,7 +105,7 @@ defineProps({
           <h6 class="text-sm">{{ name }}</h6>
           <ul class="flex-column ms-n3 nav">
             <li class="nav-item" v-for="item of items" :key="item.name">
-              <a class="nav-link" :href="item.href" target="_blank">
+              <a class="nav-link text-nowrap" :href="item.href" target="_blank">
                 {{ item.name }}
               </a>
             </li>

@@ -58,10 +58,11 @@ export default {
   display: flex;
   align-items: center;
   gap: 12px;
+  color:#37526d;
 }
 
 .header-divider {
-  width: 500px;              
+  width: 100% ;              
   height: 2px;                
   background-color: #ffdbf0;  
   margin: 8px 0;             
@@ -76,5 +77,6 @@ export default {
 
 .activity-item {
   font-size: 20px;
+  color:#37526d;
 }
 </style>

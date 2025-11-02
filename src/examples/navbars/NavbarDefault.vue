@@ -1,5 +1,5 @@
 <script setup>
-import { RouterLink } from "vue-router";
+import { RouterLink , useRouter} from "vue-router";
 import { ref, watch } from "vue";
 import { useWindowsWidth } from "../../assets/js/useWindowsWidth";
 
@@ -7,7 +7,24 @@ import { useWindowsWidth } from "../../assets/js/useWindowsWidth";
 import ArrDark from "@/assets/img/down-arrow-dark.svg";
 import downArrow from "@/assets/img/down-arrow.svg";
 import DownArrWhite from "@/assets/img/down-arrow-white.svg";
+const router = useRouter();
 
+function scrollToIntro() {
+  // 如果不在首頁，先跳回首頁
+  if (router.currentRoute.value.name !== 'presentation') {
+    router.push({ name: 'presentation' }).then(() => {
+      // 等頁面渲染完再滾動
+      setTimeout(() => {
+        const el = document.getElementById("intro");
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    });
+  } else {
+    // 如果已在首頁，直接滾動
+    const el = document.getElementById("intro");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  }
+}
 const props = defineProps({
   action: {
     type: Object,
@@ -15,9 +32,7 @@ const props = defineProps({
     color: String,
     label: String,
     default: () => ({
-      // route: "https://www.creative-tim.com/product/vue-material-kit",
-      // color: "bg-gradient-success",
-      // label: "Search"
+
     })
   },
   transparent: {
@@ -96,18 +111,8 @@ watch(
 );
 </script>
 <template>
-  <nav
-    class="navbar navbar-expand-lg top-0"
-    :class="{
-      'z-index-3 w-100 shadow-none navbar-transparent position-absolute my-3':
-        props.transparent,
-      'my-3 blur border-radius-lg z-index-3 py-2 shadow py-2 start-0 end-0 mx-4 position-absolute mt-4':
-        props.sticky,
-      'navbar-light bg-white py-3': props.light,
-      ' navbar-dark bg-gradient-dark z-index-3 py-3': props.dark
-    }"
-  >
-    <div class="container">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
       <RouterLink
         class="navbar-brand d-none d-md-block"
         :class="[
@@ -178,28 +183,26 @@ watch(
                 class="arrow ms-1 d-lg-none d-block ms-auto"
               />
             </a>
-            <div
-              class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3"
+            <div class="dropdown-menu dropdown-menu-animation border-radius-xl mt-0 mt-lg-3"
               aria-labelledby="dropdownMenuPages"
             >
               <div class="row d-none d-lg-block">
-                <div class="col-12 px-4 py-2">
-                  <div class="row">
-                    <div class="position-relative">
-                      <RouterLink
-                        :to="{ name: 'about' }"
-                        class="dropdown-item border-radius-md"
-                      >
-                        <span>第十二屆學生會</span>
-                      </RouterLink>
-                    </div>
-                  </div>
+                <div class="col-12 px-2 py-2">
+                  <RouterLink
+                    :to="{ name: 'about' }"
+                    class="dropdown-item border-radius-md"
+                    :class="getTextColor()"
+                  >
+                    <span>第十二屆學生會</span>
+                  </RouterLink>
                 </div>
               </div>
+
               <div class="d-lg-none">
                 <RouterLink
                   :to="{ name: 'about' }"
                   class="dropdown-item border-radius-md"
+                  :class="getTextColor()"
                 >
                   <span>第十二屆學生會</span>
                 </RouterLink>
@@ -208,14 +211,11 @@ watch(
           </li>       
           <li class="nav-item mx-2">
             <a
-              href="#intro"
               class="nav-link ps-2 d-flex cursor-pointer align-items-center"
               :class="getTextColor()"
+              @click.prevent="scrollToIntro"
             >
-              <i
-                class="material-icons opacity-6 me-2 text-md"
-                :class="getTextColor()"
-              >view_day</i>
+              <i class="material-icons opacity-6 me-2 text-md" :class="getTextColor()">view_day</i>
               資訊公開
             </a>
           </li>
@@ -258,19 +258,112 @@ watch(
 </template>
 <style scoped>
 @media (max-width: 991.98px) {
-  .navbar .dropdown-menu-animation.show {
-    height: auto !important;  
-    padding: 0.25rem 0 !important; 
+  .navbar .dropdown-menu .d-lg-none {
+    background-color: transparent !important;
+    padding-left: 0 !important;
+    margin-left: 25px !important;
   }
+  .navbar .dropdown-menu .dropdown-item {
+    background-color: transparent !important;
+    text-align: left !important;
+    color: inherit !important;
+  }
+  .navbar .dropdown-menu-animation.show {
+    background-color: transparent !important;
+    backdrop-filter: blur(8px); 
+    height: auto !important; 
+    padding: 0.25rem 0 !important; 
+    overflow: hidden !important; 
+
+ }
 }
 .navbar .dropdown-menu {
-  max-height: none !important; 
-  overflow: visible !important; 
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(8px); 
+  border: none !important; 
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0.3rem 0.6rem !important;
+  width: fit-content !important;
+  min-width: auto !important;
+}
+.navbar .dropdown-menu::before,
+.navbar .dropdown-menu::after {
+  display: none !important;
+  content: none !important;
+}
+.navbar .dropdown-menu .row,
+.navbar .dropdown-menu .col-12,
+.navbar .dropdown-menu .position-relative {
+  background-color: transparent !important;
+}
+.navbar .container-fluid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.navbar-brand {
+  font-size: 1.4rem !important;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+}
+.navbar .dropdown-item {
+  padding: 0.1rem 0.1rem !important;
+  font-size: 0.95rem;
+  color: #333 !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  position: relative;
+  overflow: hidden;
+}
+.navbar .dropdown-item.active,
+.navbar .dropdown-menu .dropdown-item.router-link-active,
+.navbar .dropdown-item.router-link-active {
+  background-color: transparent !important; 
+  color: #333 !important; 
+  box-shadow: none !important;
+}
+.navbar .dropdown-item:hover,
+.navbar .dropdown-item:focus {
+  background-color: rgba(0, 0, 0, 0.1) !important; 
+  color: #333 !important;
 }
 .navbar {
-  background-color: #ffffff00 !important; 
-  backdrop-filter: blur(8px); 
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100% !important; 
+  margin: 0 !important;
+  border-radius: 0 !important;
+  background-color: rgba(255, 255, 255, 1) !important;
+  backdrop-filter: blur(8px);
+  z-index: 1000;
 }
-
-
+.navbar-brand {
+  font-size: 1.4rem !important; 
+  font-weight: 700; 
+  letter-spacing: 0.5px; 
+}
+.dropdown-item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: #FFCBFF;
+  transition: width 0.3s ease;
+}
+.dropdown-item {
+  position: relative;
+  color: #333 !important;
+  background: none !important;
+  overflow: hidden;
+}
+.dropdown-item:hover::after {
+  width: 100%;
+}
 </style>

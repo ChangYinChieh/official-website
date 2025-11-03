@@ -58,6 +58,8 @@ onUnmounted(() => {
           url(${vueMkHeader});
         background-size: cover;
         background-position: center;
+        background-repeat: no-repeat; 
+        width: 100%;
       `"
       loading="lazy"
     >
@@ -82,18 +84,20 @@ onUnmounted(() => {
 
   <div class="card custom-shadow mx-3 mx-md-4 mt-n5">
     <div class="container mt-1">
-      
-      <Announcement />
-      <hr class="my-4" />
       <div class="row">
         <div class="col-md-6 mb-5 mb-md-0">
-          <History/>
+          <Announcement />
         </div>
         <div class="col-md-6">
           <UsefulLinks />
         </div>
       </div>
-      
+      <hr class="my-4" />
+      <div class="row">
+        <div class="col-md-6 mb-5 mb-md-0">
+          <History/>
+        </div>
+      </div>
     </div>
     <hr class="my-6" />
     <div class="text">
@@ -104,6 +108,7 @@ onUnmounted(() => {
       >
         {{ char }}
       </span>
+      
       
     
     <hr class="my-5" />
@@ -152,6 +157,10 @@ padding: 3rem 1rem;
 .text.show span {
   opacity: 1;
   transform: translateY(0);
+}
+.text-container {
+  position: relative;
+  z-index: 1;
 }
 .content {
   font-size: 1.2rem;

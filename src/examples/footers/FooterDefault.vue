@@ -1,5 +1,5 @@
 <script setup>
-import logoDark from "@/assets/img/logo.png";
+import logoDark from "@/assets/img/UTSAicon.png";
 import logoWhite from "@/assets/img/logo2.png";
 defineProps({
   brands: {
@@ -116,3 +116,13 @@ defineProps({
     </div>
   </footer>
 </template>
+<style scoped>
+.footer-logo {
+  width: 60px !important; /* 你可以改成想要的大小 */
+  height: auto !important;
+  max-width: none !important;
+  object-fit: contain; /* 確保圖片不被壓縮 */
+  display: block;
+}
+
+</style>

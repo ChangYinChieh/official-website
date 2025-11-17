@@ -152,7 +152,7 @@ export default {
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   width: 85%;
-  max-width: 80%; /* 增加 max-width 提升可讀性 */
+  max-width: 70%; /* 增加 max-width 提升可讀性 */
   max-height: 70vh; /* 確保內容不會超出視窗 */
   min-height: 350px;
   text-align: center;

@@ -131,7 +131,7 @@ export default {
  
  width: 85%;
  /* 設置尺寸 */
- max-width: 700px; 
+ max-width: 70%; 
  max-height: 70vh; 
  /* 🌟 設置最小高度，防止內容太少時彈窗過小並靠近導覽列 🌟 */
  min-height: 350px; 

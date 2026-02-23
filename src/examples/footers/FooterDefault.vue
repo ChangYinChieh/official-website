@@ -1,44 +1,27 @@
 <script setup>
-import logoDark from "@/assets/img/logo-ct-dark.png";
+import logoDark from "@/assets/img/UTSAicon_ResizeImage.png";
+import logoWhite from "@/assets/img/logo2.png";
 defineProps({
-  brand: {
-    type: Object,
+  brands: {
+    type: Array,
     name: String,
     logo: String,
     route: "",
-    default: () => ({
-      name: "Material Kit 2",
-      logo: logoDark,
-      route: "/"
-    })
-  },
-  socials: {
-    type: Array,
-    icon: String,
-    link: String,
     default: () => [
       {
-        icon: '<i class="fab fa-facebook text-lg opacity-8"></i>',
-        link: "https://www.facebook.com/CreativeTim/"
+        name: "臺北市立大學學生會",
+        en: "UTSA 12th",
+        logo: logoDark,
+        route: "/"
       },
       {
-        icon: '<i class="fab fa-twitter text-lg opacity-8"></i>',
-        link: "https://twitter.com/creativetim"
-      },
-      {
-        icon: '<i class="fab fa-dribbble text-lg opacity-8"></i>',
-        link: "https://dribbble.com/creativetim"
-      },
-      {
-        icon: '<i class="fab fa-github text-lg opacity-8"></i>',
-        link: "https://github.com/creativetimofficial"
-      },
-      {
-        icon: '<i class="fab fa-youtube text-lg opacity-8"></i>',
-        link: "https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w"
+        name: "臺北市立大學學生議會",
+        en: "UTSP 12th",
+        logo: logoWhite,
+        route: "/"
       }
     ]
-  },
+    },
   menus: {
     type: Array,
     name: String,
@@ -49,72 +32,47 @@ defineProps({
     },
     default: () => [
       {
-        name: "company",
+        name: "",
         items: [
           {
-            name: "about us",
-            href: "https://www.creative-tim.com/presentation"
-          },
-          {
-            name: "freebies",
-            href: "https://www.creative-tim.com/templates/free"
-          },
-          {
-            name: "premium tools",
-            href: "https://www.creative-tim.com/templates/premium"
-          },
-          { name: "blog", href: "https://www.creative-tim.com/blog" }
-        ]
-      },
-      {
-        name: "resources",
-        items: [
-          { name: "illustrations", href: "https://iradesign.io/" },
-          {
-            name: "bits & snippets",
-            href: "https://www.creative-tim.com/bits"
-          },
-          {
-            name: "affiliate program",
-            href: "https://www.creative-tim.com/affiliates/new"
+            name: "",
+            // href: "utsa@go.utaipei.edu.tw"
           }
         ]
       },
       {
-        name: "help & support",
+        name: "",
         items: [
           {
-            name: "contact us",
-            href: "https://www.creative-tim.com/contact-us"
-          },
-          {
-            name: "knowledge center",
-            href: "https://www.creative-tim.com/knowledge-center"
-          },
-          {
-            name: "custom development",
-            href: "https://services.creative-tim.com/"
-          },
-          {
-            name: "sponsorships",
-            href: "https://www.creative-tim.com/sponsorships"
+            name: "",
+            // href: "utsa@go.utaipei.edu.tw"
           }
         ]
       },
       {
-        name: "legal",
+        name: "會辦位置",
         items: [
           {
-            name: "terms & conditions",
-            href: "https://www.creative-tim.com/terms"
+            name: "博愛校區：勤樸樓CB120",
+            // href: "utsa@go.utaipei.edu.tw"
           },
           {
-            name: "privacy policy",
-            href: "https://www.creative-tim.com/privacy"
+            name: "天母校區：鴻坦樓B411",
+            // href: "utsa@go.utaipei.edu.tw"
+          }
+        ]
+      },
+      
+      {
+        name: "聯絡我們",
+        items: [
+          {
+            name: "Mail : utsa@go.utaipei.edu.tw",
+            // href: "utsa@go.utaipei.edu.tw"
           },
           {
-            name: "licenses (EULA)",
-            href: "https://www.creative-tim.com/license"
+            name: "IG : @utaipei_sa",
+            // href: "utsa@go.utaipei.edu.tw"
           }
         ]
       }
@@ -126,31 +84,19 @@ defineProps({
   <footer class="footer pt-5 mt-5">
     <div class="container">
       <div class="row">
-        <div class="col-md-3 mb-4 ms-auto">
-          <div>
-            <a :href="brand.route">
-              <img :src="brand.logo" class="mb-3 footer-logo" alt="main_logo" />
-            </a>
-            <h6 class="font-weight-bolder mb-4">{{ brand.name }}</h6>
-          </div>
-          <div>
-            <ul class="d-flex flex-row ms-n3 nav">
-              <li
-                class="nav-item"
-                v-for="{ icon, link } of socials"
-                :key="link"
-              >
-                <a
-                  class="nav-link pe-1"
-                  :href="link"
-                  target="_blank"
-                  v-html="icon"
-                >
-                </a>
-              </li>
-            </ul>
-          </div>
+        
+        <div
+          class="col-md-2 col-sm-6 col-6 mb-4"
+          v-for="brand in brands"
+          :key="brand.name"
+        >
+          
+          <img :src="brand.logo" class="mb-2 footer-logo" alt="main_logo" />
+          
+          <h6 class="font-weight-bolder mb-1">{{ brand.name }}</h6>
+          <p class="text-sm">{{ brand.en }}</p>
         </div>
+
         <div
           class="col-md-2 col-sm-6 col-6 mb-4"
           v-for="{ name, items } of menus"
@@ -159,26 +105,24 @@ defineProps({
           <h6 class="text-sm">{{ name }}</h6>
           <ul class="flex-column ms-n3 nav">
             <li class="nav-item" v-for="item of items" :key="item.name">
-              <a class="nav-link" :href="item.href" target="_blank">
+              <a class="nav-link text-nowrap" :href="item.href" target="_blank">
                 {{ item.name }}
               </a>
             </li>
           </ul>
         </div>
 
-        <div class="col-12">
-          <div class="text-center">
-            <p class="text-dark my-4 text-sm font-weight-normal">
-              All rights reserved. Copyright ©
-              {{ new Date().getFullYear() }}
-              Material Kit by
-              <a href="https://www.creative-tim.com" target="_blank"
-                >Creative Tim</a
-              >.
-            </p>
-          </div>
-        </div>
       </div>
     </div>
   </footer>
 </template>
+<style scoped>
+.footer-logo {
+  width: 80px !important; /* 你可以改成想要的大小 */
+  height: auto !important;
+  max-width: none !important;
+  object-fit: contain; /* 確保圖片不被壓縮 */
+  display: block;
+}
+
+</style>
